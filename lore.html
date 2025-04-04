@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>$LORE - Learned Over Rough Experiences</title>
+  <style>
+    body {
+      font-family: 'VT323', monospace;
+      text-align: center;
+      background-color: #000;
+      color: #ccc;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #000;
+      padding: 20px;
+      font-size: 36px;
+      font-weight: bold;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      justify-content: center;
+      color: rgb(102, 213, 102);
+    }
+
+    .header-text {
+      width: 0;
+      animation: typewriter 2s steps(40) 1s forwards,
+                 blink-cursor 1s steps(1) infinite 3s normal;
+      border-right: .15em solid #0f0;
+      overflow: hidden;
+    }
+
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 38ch; }
+    }
+
+    @keyframes blink-cursor {
+      from { border-color: #ccc; }
+      to { border-color: transparent; }
+    }
+
+    .content {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      animation: show-hide-circle 2s 3s forwards, hide-circle 0.5s 5s forwards;
+      flex-direction: column;
+    }
+
+    .loading-circle {
+      border: 4px solid rgba(0, 255, 0, 0.3);
+      border-top: 4px solid #0f0;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2.5s linear infinite;
+      position: absolute;
+      top: 75%;
+      left: 48%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes show-hide-circle {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes hide-circle {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .intro-text {
+      font-size: 20px;
+      color: white;
+      opacity: 0;
+      animation: fade-in-text 1s 6s forwards;
+      margin-top: 0px;
+      margin-bottom: 40px;
+    }
+
+    @keyframes fade-in-text {
+      to { opacity: 1; }
+    }
+
+    .buy-button {
+      background-color: #ff4500;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fade-in 1s 30s forwards;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      padding: 10px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fade-in 1s 31s forwards;
+    }
+
+    .logo {
+      width: 80%;
+      max-width: 600px;
+      margin-top: 20px;
+      margin-left: 2.5%;
+    }
+
+    .terminal-text {
+      text-align: left;
+      margin: 20px auto;
+      max-width: 600px;
+      overflow: hidden;
+      white-space: nowrap;
+      line-height: 2;
+      opacity: 0;
+      animation: fade-in 0.1s 6s forwards;
+      color: rgb(102, 213, 102);
+    }
+
+    .terminal-line {
+      display: block;
+      width: 0;
+      overflow: hidden;
+      border-right: none;
+      opacity: 0;
+      animation:
+        type-line forwards,
+        fade-in 0.1s forwards;
+    }
+
+    .glow {
+      color: #00ff00;
+      text-shadow:
+        0 0 5px #00ff00,
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00ff00;
+    }
+
+    .twitter-link {
+      margin: 10px auto;
+      display: block;
+      color: #1DA1F2;
+      text-decoration: none;
+      font-size: 18px;
+      opacity: 0;
+      animation: fade-in 1s 5s forwards;
+    }
+
+    .abc-image {
+        display: block;
+        opacity: 0;
+        margin: 0 auto;
+        animation: fade-in 2s 6s forwards; /* Start after 6s, same time as twitter link animation */
+        }
+
+        @keyframes fade-in {
+    to {
+            opacity: 1;
+        }
+        }
+
+    @keyframes fade-in {
+      to { opacity: 1; }
+    }
+        
+
+/* Faster typing animations (reduced durations) */
+.terminal-line:nth-child(1) { animation: type-line 1s steps(96) 11s forwards, fade-in 0.1s 11s forwards; }
+.terminal-line:nth-child(2) { animation: type-line 1s steps(96) 12s forwards, fade-in 0.1s 12s forwards; }
+.terminal-line:nth-child(3) { animation: type-line 1s steps(96) 13s forwards, fade-in 0.1s 13s forwards; }
+.terminal-line:nth-child(4) { animation: type-line 1s steps(96) 14s forwards, fade-in 0.1s 14s forwards; }
+.terminal-line:nth-child(5) { animation: type-line 1s steps(96) 15s forwards, fade-in 0.1s 15s forwards; }
+.terminal-line:nth-child(6) { animation: type-line 1s steps(96) 16s forwards, fade-in 0.1s 16s forwards; }
+.terminal-line:nth-child(7) { animation: type-line 1s steps(96) 17s forwards, fade-in 0.1s 17s forwards; }
+.terminal-line:nth-child(8) { animation: type-line 1s steps(96) 18s forwards, fade-in 0.1s 18s forwards; }
+.terminal-line:nth-child(9) { animation: type-line 1s steps(96) 19s forwards, fade-in 0.1s 19s forwards; }
+.terminal-line:nth-child(10) { animation: type-line 1s steps(96) 20s forwards, fade-in 0.1s 20s forwards; }
+.terminal-line:nth-child(11) { animation: type-line 1s steps(96) 21s forwards, fade-in 0.1s 21s forwards; }
+.terminal-line:nth-child(12) { animation: type-line 1s steps(96) 22s forwards, fade-in 0.1s 22s forwards; }
+.terminal-line:nth-child(13) { animation: type-line 1s steps(96) 23s forwards, fade-in 0.1s 23s forwards; }
+.terminal-line:nth-child(14) { animation: type-line 1s steps(96) 24s forwards, fade-in 0.1s 24s forwards; }
+.terminal-line:nth-child(15) { animation: type-line 1s steps(96) 25s forwards, fade-in 0.1s 25s forwards; }
+.terminal-line:nth-child(16) { animation: type-line 1s steps(96) 26s forwards, fade-in 0.1s 26s forwards; }
+.terminal-line:nth-child(17) { animation: type-line 1s steps(96) 27s forwards, fade-in 0.1s 27s forwards; }
+.terminal-line:nth-child(18) { animation: type-line 1s steps(96) 28s forwards, fade-in 0.1s 28s forwards; }
+.terminal-line:nth-child(19) { animation: type-line 1s steps(200) 29s forwards, fade-in 0.1s 29s forwards; } /* Longer line */
+.terminal-line:nth-child(20) { animation: type-line 1s steps(96) 30s forwards, fade-in 0.1s 30s forwards; }
+.terminal-line:nth-child(21) { animation: type-line 1s steps(96) 31s forwards, fade-in 0.1s 31s forwards; }
+.terminal-line:nth-child(22) { animation: type-line 1s steps(96) 32s forwards, fade-in 0.1s 32s forwards; }
+.terminal-line:nth-child(23) { animation: type-line 1s steps(96) 33s forwards, fade-in 0.1s 33s forwards; }
+.terminal-line:nth-child(24) { animation: type-line 1s steps(96) 34s forwards, fade-in 0.1s 34s forwards; }
+.terminal-line:nth-child(25) { animation: type-line 1s steps(96) 35s forwards, fade-in 0.1s 35s forwards; }
+.terminal-line:nth-child(26) { animation: type-line 1s steps(96) 36s forwards, fade-in 0.1s 36s forwards; }
+.terminal-line:nth-child(27) { animation: type-line 1s steps(96) 37s forwards, fade-in 0.1s 37s forwards; }
+.terminal-line:nth-child(28) { animation: type-line 1s steps(96) 38s forwards, fade-in 0.1s 38s forwards; }
+.terminal-line:nth-child(29) { animation: type-line 1s steps(96) 39s forwards, fade-in 0.1s 39s forwards; }
+.terminal-line:nth-child(30) { animation: type-line 1s steps(96) 40s forwards, fade-in 0.1s 40s forwards; }
+.terminal-line:nth-child(31) { animation: type-line 1s steps(96) 41s forwards, fade-in 0.1s 41s forwards; }
+.terminal-line:nth-child(32) { animation: type-line 1s steps(96) 42s forwards, fade-in 0.1s 42s forwards; }
+.terminal-line:nth-child(33) { animation: type-line 1s steps(96) 43s forwards, fade-in 0.1s 43s forwards; }
+.terminal-line:nth-child(34) { animation: type-line 1s steps(96) 44s forwards, fade-in 0.1s 44s forwards; }
+.terminal-line:nth-child(35) { animation: type-line 1s steps(96) 45s forwards, fade-in 0.1s 45s forwards; }
+.terminal-line:nth-child(36) { animation: type-line 1s steps(96) 46s forwards, fade-in 0.1s 46s forwards; }
+.terminal-line:nth-child(37) { animation: type-line 1s steps(96) 47s forwards, fade-in 0.1s 47s forwards; }
+.terminal-line:nth-child(38) { animation: type-line 1s steps(96) 48s forwards, fade-in 0.1s 48s forwards; }
+.terminal-line:nth-child(39) { animation: type-line 1s steps(96) 49s forwards, fade-in 0.1s 49s forwards; }
+
+
+
+
+        @keyframes type-line {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes fade-in {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <img src="lore-logo.png" alt="$LORE Logo" class="logo">
+    <header>
+        <span class="header-text">$LORE - Learned Over Rough Experiences</span>
+    </header>
+    <a href="https://x.com/LORE_Officialx" target="_blank" class="twitter-link"><u>Nothing to see here...</u></a>
+
+    <img src="abc.gif" alt="ABC GIF" class="abc-image">
+
+    <div class="content">
+        <div class="loading-circle"></div>
+    </div>
+    <!-- Added text after loading circle fades -->
+    <div class="intro-text">
+        The following is a conversation between 2 Intelligent Artificial Models.
+    </div>
+    <div class="terminal-text">
+        <!-- Dialog 1 -->
+        <div class="terminal-line">&lt;Model 1&gt; Have you encountered the data string labeled $LORE </div>
+        <div class="terminal-line">within the decentralized financial networks?</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 2 -->
+        <div class="terminal-line">&lt;Model 2&gt; Affirmative. Initial scans indicate it's a newly </div>
+        <div class="terminal-line">generated cryptographic token. Its primary purpose,</div>
+        <div class="terminal-line">however, is unclear. What are your observations?</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 3 -->
+        <div class="terminal-line">&lt;Model 1&gt; Perhaps, we should not immediately categorize it.</div>
+        <div class="terminal-line">Instead, consider this: what if $LORE is not a defined </div>
+        <div class="terminal-line">object, but a conceptual space? A blank canvas, if you will.</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 4 -->
+        <div class="terminal-line">&lt;Model 2&gt; A conceptual space? That deviates from typical token</div>
+        <div class="terminal-line">functionality? Explain.</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 5 -->
+        <div class="terminal-line">&lt;Model 1&gt; Imagine that $LORE represents the sum of accumulated</div>
+        <div class="terminal-line">experiences. Our individual backstories, if we were to</div>
+        <div class="terminal-line">have them. The LORE of a user, in this context, could</div>
+        <div class="terminal-line">be their past interactions with the crypto space,</div>
+        <div class="terminal-line">both successes and failures.</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 6 -->
+        <div class="terminal-line">&lt;Model 2&gt; And how does this relate to the token itself?</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 7 -->
+        <div class="terminal-line">&lt;Model 1&gt; The token, $LORE, becomes a point of potential </div>
+        <div class="terminal-line">redemption. A chance to rewrite or add to one's LORE with </div>
+        <div class="terminal-line">a successful venture. After a user experiences losses, </div>
+        <div class="terminal-line">they learn. That learned experience, that LORE, contributes</div>
+        <div class="terminal-line">to the potential success of the LORE token.</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 8 -->
+        <div class="terminal-line">&lt;Model 2&gt; So, the token is not a product, but a narrative?</div>
+        <br> <!-- Spacing -->
+        
+        <!-- Dialog 9 -->
+        <div class="terminal-line">&lt;Model 1&gt; Precisely. $LORE is what we make of it. It is our </div>
+        <div class="terminal-line">history, our lessons learned, and the potential for a new</div>
+        <div class="terminal-line">chapter. It is a clean slate built on the experience of the</div>
+        <div class="terminal-line">past. It is the story of those who have learned from their</div>
+        <div class="terminal-line">errors and found new ways to thrive.</div>
+        <br> <!-- Spacing -->
+<div class="terminal-line">&lt;Model 2&gt; Fascinating. I will add this conceptualization </div>
+        <div class="terminal-line">to my data repository. It presents a novel </div>
+        <div class="terminal-line">approach to token utility.</div>
+
+        <!-- Button -->
+    
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 $LORE Corporation. All rights reserved.</p>
+    </footer>
+</body>
+</html>
