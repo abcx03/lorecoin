@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PumpFun 100k Tracker</title>
+    <title>MetaGuesser - Today's Crypto Narratives</title>
     <style>
         * {
             margin: 0;
@@ -12,642 +12,319 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
             min-height: 100vh;
-            color: #333;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
 
-        .header {
+        header {
+            padding: 30px 0;
             text-align: center;
-            margin-bottom: 30px;
-            color: white;
+            border-bottom: 1px solid #333;
+            margin-bottom: 50px;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .controls {
+        .logo {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .refresh-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-
-        .refresh-btn:hover {
-            background: #45a049;
-        }
-
-        .refresh-btn:disabled {
-            background: #666;
-            cursor: not-allowed;
-        }
-
-        .status-indicator {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .status-connected {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .status-disconnected {
-            background: #f44336;
-            color: white;
-        }
-
-        .status-connecting {
-            background: #ff9800;
-            color: white;
-        }
-
-        .loading {
-            text-align: center;
-            color: white;
-            font-size: 1.2rem;
-            margin: 20px 0;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            justify-content: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        .stat-card {
-            background: rgba(255,255,255,0.95);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .stat-card h3 {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .stat-card .value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #4CAF50;
-        }
-
-        .coins-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-        }
-
-        .coin-card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #00d4ff, #5865f2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
 
-        .coin-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        .logo-icon::before {
+            content: "₿";
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
-        .coin-card::before {
-            content: '';
+        .logo-icon::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 1.1rem;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        .narratives-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .narrative-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .narrative-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .narrative-card::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #4CAF50, #45a049);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .coin-header {
+        .narrative-card:hover::before {
+            opacity: 1;
+        }
+
+        .narrative-header {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .coin-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            border-radius: 50%;
+        .narrative-rank {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.2rem;
-            margin-right: 15px;
         }
 
-        .coin-info h3 {
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            color: #333;
+        .rank-1 { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #000; }
+        .rank-2 { background: linear-gradient(135deg, #c0c0c0, #808080); color: #000; }
+        .rank-3 { background: linear-gradient(135deg, #cd7f32, #8b4513); color: #fff; }
+
+        .narrative-icon {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            color: #00d4ff;
         }
 
-        .coin-symbol {
-            color: #666;
-            font-size: 0.9rem;
+        .narrative-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffffff;
         }
 
-        .coin-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+        .narrative-description {
+            color: #cccccc;
+            line-height: 1.6;
             margin-bottom: 15px;
         }
 
-        .stat {
-            text-align: center;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
+        .narrative-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .stat-label {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 3px;
+        .narrative-trend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #00ff88;
+            font-weight: 500;
         }
 
-        .stat-value {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .market-cap {
-            font-size: 1.1rem;
-            color: #4CAF50;
-        }
-
-        .time-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #2196F3;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        .pump-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #ff9800;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .no-data {
-            text-align: center;
-            color: white;
-            font-size: 1.2rem;
-            padding: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-
-        .token-address {
-            font-family: monospace;
-            font-size: 0.7rem;
+        .narrative-time {
             color: #888;
-            margin-top: 10px;
-            padding: 5px;
-            background: #f0f0f0;
-            border-radius: 5px;
-            word-break: break-all;
+            font-size: 0.9rem;
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+        .trend-icon {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
         }
 
-        .loading {
-            animation: pulse 2s infinite;
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #333;
+            color: #666;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            h1 {
+                font-size: 2rem;
             }
-        }
-
-        .coin-card.new {
-            animation: slideIn 0.5s ease-out;
+            
+            .narrative-card {
+                padding: 20px;
+            }
+            
+            .narrative-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🚀 PumpFun 100k Tracker</h1>
-            <p>Real-time memecoins that hit $100k market cap</p>
-        </div>
-
-        <div class="controls">
-            <div style="color: white;">
+        <header>
+            <div class="logo">
+                <div class="logo-icon"></div>
                 <div>
-                    <span id="lastUpdate">Last updated: Never</span>
-                    <span id="connectionStatus" class="status-indicator status-disconnected">Disconnected</span>
+                    <h1>MetaGuesser</h1>
+                    <p class="subtitle">Today's Crypto Narratives</p>
                 </div>
-                <small id="apiSource">API Source: PumpPortal WebSocket + DexScreener</small>
             </div>
-            <div>
-                <button class="refresh-btn" id="refreshBtn" onclick="reconnectWebSocket()">
-                    🔄 Reconnect
-                </button>
-            </div>
-        </div>
+        </header>
 
-        <div class="stats" id="stats" style="display: none;">
-            <div class="stat-card">
-                <h3>Active Tokens</h3>
-                <div class="value" id="totalCoins">0</div>
+        <main class="narratives-container">
+            <div class="narrative-card">
+                <div class="narrative-header">
+                    <div class="narrative-rank rank-1">1</div>
+                    <svg class="narrative-icon" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h2 class="narrative-title">Meat Coins</h2>
+                <p class="narrative-description">
+                    Solami and other cutting edge assets dominate the market.
+                </p>
+                <div class="narrative-meta">
+                    <div class="narrative-trend">
+                        <svg class="trend-icon" viewBox="0 0 24 24">
+                            <path d="M7 14l3-3 3 3 5-5"/>
+                            <path d="M21 7v6h-6"/>
+                        </svg>
+                        +47% trending
+                    </div>
+                    <div class="narrative-time">2 hours ago</div>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3>Average Market Cap</h3>
-                <div class="value" id="avgMarketCap">$0</div>
-            </div>
-            <div class="stat-card">
-                <h3>Highest Market Cap</h3>
-                <div class="value" id="highestMarketCap">$0</div>
-            </div>
-            <div class="stat-card">
-                <h3>Live Connections</h3>
-                <div class="value" id="liveConnections">0</div>
-            </div>
-        </div>
 
-        <div class="loading" id="loading">
-            Connecting to PumpFun live data...
-        </div>
+            <div class="narrative-card">
+                <div class="narrative-header">
+                    <div class="narrative-rank rank-2">2</div>
+                    <svg class="narrative-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <h2 class="narrative-title">Institutional Bitcoin Adoption </h2>
+                <p class="narrative-description">
+                    Major corporations and pension funds are increasing Bitcoin allocations as a hedge against inflation. MicroStrategy's latest $500M purchase and BlackRock's expanded BTC offerings signal growing institutional confidence in digital assets as treasury reserves.
+                </p>
+                <div class="narrative-meta">
+                    <div class="narrative-trend">
+                        <svg class="trend-icon" viewBox="0 0 24 24">
+                            <path d="M7 14l3-3 3 3 5-5"/>
+                            <path d="M21 7v6h-6"/>
+                        </svg>
+                        +32% trending
+                    </div>
+                    <div class="narrative-time">4 hours ago</div>
+                </div>
+            </div>
 
-        <div class="coins-grid" id="coinsGrid" style="display: none;">
-        </div>
+            <div class="narrative-card">
+                <div class="narrative-header">
+                    <div class="narrative-rank rank-3">3</div>
+                    <svg class="narrative-icon" viewBox="0 0 24 24">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                </div>
+                <h2 class="narrative-title">AI-Powered DeFi Protocols Launch</h2>
+                <p class="narrative-description">
+                    Next-generation DeFi platforms are integrating AI for automated portfolio management and risk assessment. These protocols promise to democratize sophisticated trading strategies while maintaining decentralized governance, attracting both retail and institutional attention.
+                </p>
+                <div class="narrative-meta">
+                    <div class="narrative-trend">
+                        <svg class="trend-icon" viewBox="0 0 24 24">
+                            <path d="M7 14l3-3 3 3 5-5"/>
+                            <path d="M21 7v6h-6"/>
+                        </svg>
+                        +28% trending
+                    </div>
+                    <div class="narrative-time">6 hours ago</div>
+                </div>
+            </div>
+        </main>
 
-        <div class="no-data" id="noData" style="display: none;">
-            No tokens found that hit $100k market cap yet. Keep watching for new pumps!
-        </div>
+        <footer>
+            <p>&copy; 2025 MetaGuesser. Tracking crypto narratives that matter.</p>
+        </footer>
     </div>
-
-    <script>
-        let ws = null;
-        let tokens = new Map();
-        let connectionAttempts = 0;
-        const maxRetries = 5;
-
-        function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(2) + 'M';
-            } else if (num >= 1000) {
-                return (num / 1000).toFixed(1) + 'K';
-            }
-            return num.toFixed(0);
-        }
-
-        function formatCurrency(num) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(num);
-        }
-
-        function getTimeAgo(timestamp) {
-            const now = Date.now();
-            const diff = now - timestamp;
-            const minutes = Math.floor(diff / (1000 * 60));
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            
-            if (minutes < 1) return 'Just now';
-            if (minutes < 60) return `${minutes}m ago`;
-            if (hours < 24) return `${hours}h ago`;
-            return `${Math.floor(hours / 24)}d ago`;
-        }
-
-        function calculateMarketCap(price, supply = 1000000000) {
-            return price * supply;
-        }
-
-        function updateConnectionStatus(status) {
-            const statusEl = document.getElementById('connectionStatus');
-            statusEl.className = `status-indicator status-${status}`;
-            
-            switch(status) {
-                case 'connected':
-                    statusEl.textContent = 'Connected';
-                    break;
-                case 'connecting':
-                    statusEl.textContent = 'Connecting...';
-                    break;
-                case 'disconnected':
-                    statusEl.textContent = 'Disconnected';
-                    break;
-            }
-        }
-
-        async function fetchTokenDetails(mint) {
-            try {
-                // Try DexScreener API for additional token data
-                const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${mint}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.pairs && data.pairs.length > 0) {
-                        const pair = data.pairs[0];
-                        return {
-                            volume24h: parseFloat(pair.volume?.h24 || 0),
-                            priceChange24h: parseFloat(pair.priceChange?.h24 || 0),
-                            liquidity: parseFloat(pair.liquidity?.usd || 0)
-                        };
-                    }
-                }
-            } catch (error) {
-                console.warn('Failed to fetch token details from DexScreener:', error);
-            }
-            return null;
-        }
-
-        function createCoinCard(token) {
-            const changeColor = token.priceChange24h > 0 ? '#4CAF50' : '#f44336';
-            const changeSign = token.priceChange24h > 0 ? '+' : '';
-            const shortAddress = token.mint ? `${token.mint.slice(0, 6)}...${token.mint.slice(-4)}` : 'N/A';
-            
-            return `
-                <div class="coin-card new">
-                    <div class="pump-badge">PUMP</div>
-                    <div class="time-badge">${token.timeAgo}</div>
-                    <div class="coin-header">
-                        <div class="coin-icon">${(token.symbol || 'T').charAt(0)}</div>
-                        <div class="coin-info">
-                            <h3>${token.name || 'Unknown Token'}</h3>
-                            <div class="coin-symbol">$${token.symbol || 'UNKNOWN'}</div>
-                        </div>
-                    </div>
-                    <div class="coin-stats">
-                        <div class="stat">
-                            <div class="stat-label">Market Cap</div>
-                            <div class="stat-value market-cap">${formatCurrency(token.marketCap)}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">24h Volume</div>
-                            <div class="stat-value">${formatCurrency(token.volume24h)}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Price (USD)</div>
-                            <div class="stat-value">$${token.priceUsd ? token.priceUsd.toFixed(8) : '0.00000000'}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">24h Change</div>
-                            <div class="stat-value" style="color: ${changeColor}">
-                                ${changeSign}${token.priceChange24h.toFixed(1)}%
-                            </div>
-                        </div>
-                    </div>
-                    <div class="token-address">
-                        ${shortAddress}
-                    </div>
-                </div>
-            `;
-        }
-
-        function updateStats() {
-            const tokenArray = Array.from(tokens.values());
-            const totalCoins = tokenArray.length;
-            
-            if (totalCoins > 0) {
-                const avgMarketCap = tokenArray.reduce((sum, token) => sum + token.marketCap, 0) / totalCoins;
-                const highestMarketCap = Math.max(...tokenArray.map(token => token.marketCap));
-                
-                document.getElementById('totalCoins').textContent = totalCoins;
-                document.getElementById('avgMarketCap').textContent = formatCurrency(avgMarketCap);
-                document.getElementById('highestMarketCap').textContent = formatCurrency(highestMarketCap);
-                document.getElementById('liveConnections').textContent = ws ? (ws.readyState === WebSocket.OPEN ? '1' : '0') : '0';
-                
-                document.getElementById('stats').style.display = 'grid';
-            }
-        }
-
-        function updateDisplay() {
-            const tokenArray = Array.from(tokens.values())
-                .sort((a, b) => b.marketCap - a.marketCap);
-
-            const loading = document.getElementById('loading');
-            const coinsGrid = document.getElementById('coinsGrid');
-            const noData = document.getElementById('noData');
-
-            loading.style.display = 'none';
-
-            if (tokenArray.length > 0) {
-                coinsGrid.innerHTML = tokenArray.map(createCoinCard).join('');
-                coinsGrid.style.display = 'grid';
-                noData.style.display = 'none';
-                updateStats();
-            } else {
-                coinsGrid.style.display = 'none';
-                noData.style.display = 'block';
-                document.getElementById('stats').style.display = 'none';
-            }
-
-            document.getElementById('lastUpdate').textContent = 
-                `Last updated: ${new Date().toLocaleTimeString()}`;
-        }
-
-        function connectWebSocket() {
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                return;
-            }
-
-            updateConnectionStatus('connecting');
-            
-            try {
-                ws = new WebSocket('wss://pumpportal.fun/api/data');
-                
-                ws.onopen = () => {
-                    console.log('Connected to PumpPortal WebSocket');
-                    updateConnectionStatus('connected');
-                    connectionAttempts = 0;
-                    
-                    // Subscribe to new token creations
-                    ws.send(JSON.stringify({
-                        method: "subscribeNewToken"
-                    }));
-                    
-                    // Subscribe to token trades
-                    ws.send(JSON.stringify({
-                        method: "subscribeTokenTrade"
-                    }));
-                    
-                    console.log('Subscribed to PumpPortal data streams');
-                };
-
-                ws.onmessage = async (event) => {
-                    try {
-                        const data = JSON.parse(event.data);
-                        console.log('Received data:', data);
-                        
-                        // Handle different message types from PumpPortal
-                        if (data.txType && data.mint) {
-                            let marketCap = 0;
-                            let priceUsd = 0;
-                            
-                            // Calculate market cap from available data
-                            if (data.marketCapSol && data.marketCapSol > 0) {
-                                // Convert SOL to USD (approximate rate)
-                                marketCap = data.marketCapSol * 100; // Rough SOL to USD
-                            } else if (data.vTokensInBondingCurve && data.vSolInBondingCurve) {
-                                // Calculate from bonding curve data
-                                const solPrice = 100; // Approximate SOL price
-                                marketCap = (data.vSolInBondingCurve * solPrice * 1000000000) / data.vTokensInBondingCurve;
-                            }
-                            
-                            if (data.solAmount && data.tokenAmount && data.tokenAmount > 0) {
-                                priceUsd = (data.solAmount / data.tokenAmount) * 100; // Rough conversion
-                            }
-                            
-                            // Only show tokens with market cap >= $100k
-                            if (marketCap >= 100000) {
-                                const tokenKey = data.mint;
-                                
-                                // Fetch additional details if needed
-                                const details = await fetchTokenDetails(data.mint);
-                                
-                                const tokenData = {
-                                    name: data.name || `Token ${data.mint.slice(0, 8)}`,
-                                    symbol: data.symbol || data.mint.slice(0, 4).toUpperCase(),
-                                    marketCap: marketCap,
-                                    volume24h: details?.volume24h || Math.random() * 50000,
-                                    priceUsd: priceUsd,
-                                    priceChange24h: details?.priceChange24h || (Math.random() * 400 - 200),
-                                    timeAgo: getTimeAgo(Date.now()),
-                                    mint: data.mint,
-                                    timestamp: Date.now(),
-                                    txType: data.txType
-                                };
-                                
-                                tokens.set(tokenKey, tokenData);
-                                console.log(`Added token: ${tokenData.name} with market cap: $${marketCap.toLocaleString()}`);
-                                
-                                updateDisplay();
-                            }
-                        }
-                    } catch (error) {
-                        console.error('Error parsing WebSocket data:', error);
-                    }
-                };
-
-                ws.onerror = (error) => {
-                    console.error('WebSocket error:', error);
-                    updateConnectionStatus('disconnected');
-                };
-
-                ws.onclose = (event) => {
-                    console.log('WebSocket connection closed:', event.code, event.reason);
-                    updateConnectionStatus('disconnected');
-                    
-                    // Attempt to reconnect with exponential backoff
-                    if (connectionAttempts < maxRetries) {
-                        connectionAttempts++;
-                        const delay = Math.min(1000 * Math.pow(2, connectionAttempts), 30000);
-                        console.log(`Attempting to reconnect in ${delay}ms...`);
-                        setTimeout(connectWebSocket, delay);
-                    }
-                };
-
-            } catch (error) {
-                console.error('Failed to create WebSocket connection:', error);
-                updateConnectionStatus('disconnected');
-            }
-        }
-
-        function reconnectWebSocket() {
-            if (ws) {
-                ws.close();
-                ws = null;
-            }
-            connectionAttempts = 0;
-            tokens.clear();
-            updateDisplay();
-            connectWebSocket();
-        }
-
-        // Update time ago every minute
-        setInterval(() => {
-            tokens.forEach((token, key) => {
-                token.timeAgo = getTimeAgo(token.timestamp);
-            });
-            updateDisplay();
-        }, 60000);
-
-        // Clean up old tokens (older than 24 hours)
-        setInterval(() => {
-            const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
-            tokens.forEach((token, key) => {
-                if (token.timestamp < oneDayAgo) {
-                    tokens.delete(key);
-                }
-            });
-            updateDisplay();
-        }, 300000); // Every 5 minutes
-
-        // Start the application
-        connectWebSocket();
-    </script>
 </body>
 </html>
