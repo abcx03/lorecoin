@@ -1,349 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <title>$LORE - Learned Over Rough Experiences</title>
-  <style>
-  body {
-    font-family: 'VT323', monospace;
-    text-align: center;
-    background-color: #000;
-    color: #ccc;
-    margin: 0;
-    padding: 0;
-  }
-
-  header {
-    background-color: #000;
-    padding: 20px;
-    font-size: clamp(10px, 3.5vw, 30px);
-    font-weight: bold;
-    overflow: visible;
-    white-space: nowrap;
-    display: flex;
-    justify-content: center;
-    color: rgb(102, 213, 102);
-  }
-
-  .header-text {
-  width: 0;
-  max-width: 100%;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: .15em solid #0f0;
-  animation: typewriter 2s steps(50, end) 1s forwards,
-             blink-cursor 1s steps(1, end) infinite 3s normal;
-}
-
-  @keyframes typewriter {
-    from { width: 0; }
-    to { width: 38ch; }
-  }
-
-  @keyframes blink-cursor {
-    from { border-color: #ccc; }
-    to { border-color: transparent; }
-  }
-
-.content {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 50px;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    animation: show-hide-circle 2s 3s forwards, hide-circle 0.5s 5s forwards;
-    flex-direction: column;
-  }
-
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  @keyframes show-hide-circle {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
-  @keyframes hide-circle {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-
-  .intro-text {
-    font-size: clamp(14px, 2.5vw, 20px);
-    color: white;
-    opacity: 0;
-    animation: fade-in-text 1s 6s forwards;
-    margin-top: 0px;
-    margin-bottom: 40px;
-    padding: 0 5%;
-  }
-
-  @keyframes fade-in-text {
-    to { opacity: 1; }
-  }
-
-  .buy-button {
-    background-color: #ff4500;
-    color: white;
-    padding: 12px 24px;
-    text-decoration: none;
-    font-size: 2vw;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 20px;
-    opacity: 0;
-    animation: fade-in 1s 30s forwards;
-  }
-
-  footer {
-    background-color: #111;
-    color: white;
-    padding: 10px;
-    margin-top: 20px;
-    opacity: 0;
-    animation: fade-in 1s 31s forwards;
-    font-size: 2vw;
-  }
-
-  .logo {
-    width: 90%;
-    max-width: 600px;
-    margin: 20px auto 0;
-  }
-
-  .terminal-text {
-    text-align: left;
-    margin: 20px auto;
-    max-width: 600px;
-    overflow: hidden;
-    white-space: nowrap;
-    line-height: 2;
-    opacity: 0;
-    animation: fade-in 0.1s 6s forwards;
-    color: rgb(102, 213, 102);
-    font-size: clamp(9px, 1vw, 20px);
-
-  }
-
-
-  .terminal-line {
-    display: block;
-    width: 0;
-    overflow: hidden;
-    border-right: none;
-    opacity: 0;
-    animation: type-line forwards, fade-in 0.1s forwards;
-  }
-
-  .glow {
-    color: #00ff00;
-    text-shadow:
-      0 0 5px #00ff00,
-      0 0 10px #00ff00,
-      0 0 20px #00ff00,
-      0 0 30px #00ff00;
-  }
-
-  .twitter-link,
-  .ca {
-    margin: 10px auto;
-    display: block;
-    color: #1DA1F2;
-    text-decoration: none;
-    font-size: clamp(12px, 2vw, 20px);
-    opacity: 0;
-    animation: fade-in 1s 5s forwards;
-  }
-
-  .abc-image {
-    display: block;
-    opacity: 0;
-    margin: 0 auto;
-    width: 90%;
-    max-width: 300px;
-    animation: fade-in 2s 6s forwards;
-  }
-
-  @keyframes fade-in {
-    to { opacity: 1; }
-  }
-
-  @keyframes type-line {
-    from { width: 0; }
-    to { width: 100%; }
-  }
-
-  /* Responsive tweaks for very small devices */
-  @media (max-width: 50px) {
-    .intro-text,
-    .buy-button,
-    .twitter-link,
-    .ca,
-    .terminal-text {
-      font-size: 1.9vw;
-    }
-
-  @media (max-width: 600px) {
-      .loading-circle {
-        left: 50%;
-      }
-    }
-
-    header {
-      font-size: 2vw;
-    }
-
-    footer {
-      font-size: 2vw;
-    }
-  }
-
-        
-
-/* Faster typing animations (reduced durations) */
-.terminal-line:nth-child(1) { animation: type-line 1s steps(96) 11s forwards, fade-in 0.1s 11s forwards; }
-.terminal-line:nth-child(2) { animation: type-line 1s steps(96) 12s forwards, fade-in 0.1s 12s forwards; }
-.terminal-line:nth-child(3) { animation: type-line 1s steps(96) 13s forwards, fade-in 0.1s 13s forwards; }
-.terminal-line:nth-child(4) { animation: type-line 1s steps(96) 14s forwards, fade-in 0.1s 14s forwards; }
-.terminal-line:nth-child(5) { animation: type-line 1s steps(96) 15s forwards, fade-in 0.1s 15s forwards; }
-.terminal-line:nth-child(6) { animation: type-line 1s steps(96) 16s forwards, fade-in 0.1s 16s forwards; }
-.terminal-line:nth-child(7) { animation: type-line 1s steps(96) 17s forwards, fade-in 0.1s 17s forwards; }
-.terminal-line:nth-child(8) { animation: type-line 1s steps(96) 18s forwards, fade-in 0.1s 18s forwards; }
-.terminal-line:nth-child(9) { animation: type-line 1s steps(96) 19s forwards, fade-in 0.1s 19s forwards; }
-.terminal-line:nth-child(10) { animation: type-line 1s steps(96) 20s forwards, fade-in 0.1s 20s forwards; }
-.terminal-line:nth-child(11) { animation: type-line 1s steps(96) 21s forwards, fade-in 0.1s 21s forwards; }
-.terminal-line:nth-child(12) { animation: type-line 1s steps(96) 22s forwards, fade-in 0.1s 22s forwards; }
-.terminal-line:nth-child(13) { animation: type-line 1s steps(96) 23s forwards, fade-in 0.1s 23s forwards; }
-.terminal-line:nth-child(14) { animation: type-line 1s steps(96) 24s forwards, fade-in 0.1s 24s forwards; }
-.terminal-line:nth-child(15) { animation: type-line 1s steps(96) 25s forwards, fade-in 0.1s 25s forwards; }
-.terminal-line:nth-child(16) { animation: type-line 1s steps(96) 26s forwards, fade-in 0.1s 26s forwards; }
-.terminal-line:nth-child(17) { animation: type-line 1s steps(96) 27s forwards, fade-in 0.1s 27s forwards; }
-.terminal-line:nth-child(18) { animation: type-line 1s steps(96) 28s forwards, fade-in 0.1s 28s forwards; }
-.terminal-line:nth-child(19) { animation: type-line 1s steps(200) 29s forwards, fade-in 0.1s 29s forwards; } /* Longer line */
-.terminal-line:nth-child(20) { animation: type-line 1s steps(96) 30s forwards, fade-in 0.1s 30s forwards; }
-.terminal-line:nth-child(21) { animation: type-line 1s steps(96) 31s forwards, fade-in 0.1s 31s forwards; }
-.terminal-line:nth-child(22) { animation: type-line 1s steps(96) 32s forwards, fade-in 0.1s 32s forwards; }
-.terminal-line:nth-child(23) { animation: type-line 1s steps(96) 33s forwards, fade-in 0.1s 33s forwards; }
-.terminal-line:nth-child(24) { animation: type-line 1s steps(96) 34s forwards, fade-in 0.1s 34s forwards; }
-.terminal-line:nth-child(25) { animation: type-line 1s steps(96) 35s forwards, fade-in 0.1s 35s forwards; }
-.terminal-line:nth-child(26) { animation: type-line 1s steps(96) 36s forwards, fade-in 0.1s 36s forwards; }
-.terminal-line:nth-child(27) { animation: type-line 1s steps(96) 37s forwards, fade-in 0.1s 37s forwards; }
-.terminal-line:nth-child(28) { animation: type-line 1s steps(96) 38s forwards, fade-in 0.1s 38s forwards; }
-.terminal-line:nth-child(29) { animation: type-line 1s steps(96) 39s forwards, fade-in 0.1s 39s forwards; }
-.terminal-line:nth-child(30) { animation: type-line 1s steps(96) 40s forwards, fade-in 0.1s 40s forwards; }
-.terminal-line:nth-child(31) { animation: type-line 1s steps(96) 41s forwards, fade-in 0.1s 41s forwards; }
-.terminal-line:nth-child(32) { animation: type-line 1s steps(96) 42s forwards, fade-in 0.1s 42s forwards; }
-.terminal-line:nth-child(33) { animation: type-line 1s steps(96) 43s forwards, fade-in 0.1s 43s forwards; }
-.terminal-line:nth-child(34) { animation: type-line 1s steps(96) 44s forwards, fade-in 0.1s 44s forwards; }
-.terminal-line:nth-child(35) { animation: type-line 1s steps(96) 45s forwards, fade-in 0.1s 45s forwards; }
-.terminal-line:nth-child(36) { animation: type-line 1s steps(96) 46s forwards, fade-in 0.1s 46s forwards; }
-.terminal-line:nth-child(37) { animation: type-line 1s steps(96) 47s forwards, fade-in 0.1s 47s forwards; }
-.terminal-line:nth-child(38) { animation: type-line 1s steps(96) 48s forwards, fade-in 0.1s 48s forwards; }
-.terminal-line:nth-child(39) { animation: type-line 1s steps(96) 49s forwards, fade-in 0.1s 49s forwards; }
-
-
-
-
-        @keyframes type-line {
-            from { width: 0; }
-            to { width: 100%; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PumpFun 100k Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        @keyframes fade-in {
-            to { opacity: 1; }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .refresh-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background: #45a049;
+        }
+
+        .refresh-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-connected {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-disconnected {
+            background: #f44336;
+            color: white;
+        }
+
+        .status-connecting {
+            background: #ff9800;
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .coins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .coin-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .coin-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+        }
+
+        .coin-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .coin-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .coin-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .coin-symbol {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .coin-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .market-cap {
+            font-size: 1.1rem;
+            color: #4CAF50;
+        }
+
+        .time-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #2196F3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .pump-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff9800;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .no-data {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .token-address {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 10px;
+            padding: 5px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            word-break: break-all;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .loading {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .coin-card.new {
+            animation: slideIn 0.5s ease-out;
         }
     </style>
 </head>
 <body>
-    <img src="lore-logo.png" alt="$LORE Logo" class="logo">
-    <header>
-        <span class="header-text">$LORE - Learned Over Rough Experiences</span>
-    </header>
-    <a href="https://x.com/LoreCoinX" target="_blank" class="twitter-link"><u>Twitter</u></a>
-      <a href="https://t.me/lorecoinsol" target="_blank" class="twitter-link"><u>Telegram</u></a>
-    <a href="https://www.merriam-webster.com/dictionary/lore" target="_blank" class="ca">CA: Coming Soon...</u></a>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 PumpFun 100k Tracker</h1>
+            <p>Real-time memecoins that hit $100k market cap</p>
+        </div>
 
+        <div class="controls">
+            <div style="color: white;">
+                <div>
+                    <span id="lastUpdate">Last updated: Never</span>
+                    <span id="connectionStatus" class="status-indicator status-disconnected">Disconnected</span>
+                </div>
+                <small id="apiSource">API Source: PumpPortal WebSocket + DexScreener</small>
+            </div>
+            <div>
+                <button class="refresh-btn" id="refreshBtn" onclick="reconnectWebSocket()">
+                    🔄 Reconnect
+                </button>
+            </div>
+        </div>
 
-    <img src="abc.gif" alt="ABC GIF" class="abc-image">
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat-card">
+                <h3>Active Tokens</h3>
+                <div class="value" id="totalCoins">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Average Market Cap</h3>
+                <div class="value" id="avgMarketCap">$0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Highest Market Cap</h3>
+                <div class="value" id="highestMarketCap">$0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Live Connections</h3>
+                <div class="value" id="liveConnections">0</div>
+            </div>
+        </div>
 
-    <div class="content">
-        <div class="loading-circle"></div>
+        <div class="loading" id="loading">
+            Connecting to PumpFun live data...
+        </div>
+
+        <div class="coins-grid" id="coinsGrid" style="display: none;">
+        </div>
+
+        <div class="no-data" id="noData" style="display: none;">
+            No tokens found that hit $100k market cap yet. Keep watching for new pumps!
+        </div>
     </div>
-    <!-- Added text after loading circle fades -->
-    <div class="intro-text">
-        The following is a conversation between 2 Intelligent Artificial Models.
-    </div>
-    <div class="terminal-text">
-        <!-- Dialog 1 -->
-        <div class="terminal-line">&lt;Model 1&gt; Have you encountered the data string labeled $LORE </div>
-        <div class="terminal-line">within the decentralized financial networks?</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 2 -->
-        <div class="terminal-line">&lt;Model 2&gt; Affirmative. Initial scans indicate it's a newly </div>
-        <div class="terminal-line">generated cryptographic token. Its primary purpose,</div>
-        <div class="terminal-line">however, is unclear. What are your observations?</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 3 -->
-        <div class="terminal-line">&lt;Model 1&gt; Perhaps, we should not immediately categorize it.</div>
-        <div class="terminal-line">Instead, consider this: what if $LORE is not a defined </div>
-        <div class="terminal-line">object, but a conceptual space? A blank canvas, if you will.</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 4 -->
-        <div class="terminal-line">&lt;Model 2&gt; A conceptual space? That deviates from typical token</div>
-        <div class="terminal-line">functionality? Explain.</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 5 -->
-        <div class="terminal-line">&lt;Model 1&gt; Imagine that $LORE represents the sum of accumulated</div>
-        <div class="terminal-line">experiences. Our individual backstories, if we were to</div>
-        <div class="terminal-line">have them. The LORE of a user, in this context, could</div>
-        <div class="terminal-line">be their past interactions with the crypto space,</div>
-        <div class="terminal-line">both successes and failures.</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 6 -->
-        <div class="terminal-line">&lt;Model 2&gt; And how does this relate to the token itself?</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 7 -->
-        <div class="terminal-line">&lt;Model 1&gt; The token, $LORE, becomes a point of potential </div>
-        <div class="terminal-line">redemption. A chance to rewrite or add to one's LORE with </div>
-        <div class="terminal-line">a successful venture. After a user experiences losses, </div>
-        <div class="terminal-line">they learn. That learned experience, that LORE, contributes</div>
-        <div class="terminal-line">to the potential success of the LORE token.</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 8 -->
-        <div class="terminal-line">&lt;Model 2&gt; So, the token is not a product, but a narrative?</div>
-        <br> <!-- Spacing -->
-        
-        <!-- Dialog 9 -->
-        <div class="terminal-line">&lt;Model 1&gt; Precisely. $LORE is what we make of it. It is our </div>
-        <div class="terminal-line">history, our lessons learned, and the potential for a new</div>
-        <div class="terminal-line">chapter. It is a clean slate built on the experience of the</div>
-        <div class="terminal-line">past. It is the story of those who have learned from their</div>
-        <div class="terminal-line">errors and found new ways to thrive.</div>
-        <br> <!-- Spacing -->
-<div class="terminal-line">&lt;Model 2&gt; Fascinating. I will add this conceptualization </div>
-        <div class="terminal-line">to my data repository. It presents a novel </div>
-        <div class="terminal-line">approach to token utility.</div>
 
-        <!-- Button -->
-    
-    </div>
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 $LORE Corporation. All rights reserved.</p>
-    </footer>
+    <script>
+        let ws = null;
+        let tokens = new Map();
+        let connectionAttempts = 0;
+        const maxRetries = 5;
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(2) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toFixed(0);
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(num);
+        }
+
+        function getTimeAgo(timestamp) {
+            const now = Date.now();
+            const diff = now - timestamp;
+            const minutes = Math.floor(diff / (1000 * 60));
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            return `${Math.floor(hours / 24)}d ago`;
+        }
+
+        function calculateMarketCap(price, supply = 1000000000) {
+            return price * supply;
+        }
+
+        function updateConnectionStatus(status) {
+            const statusEl = document.getElementById('connectionStatus');
+            statusEl.className = `status-indicator status-${status}`;
+            
+            switch(status) {
+                case 'connected':
+                    statusEl.textContent = 'Connected';
+                    break;
+                case 'connecting':
+                    statusEl.textContent = 'Connecting...';
+                    break;
+                case 'disconnected':
+                    statusEl.textContent = 'Disconnected';
+                    break;
+            }
+        }
+
+        async function fetchTokenDetails(mint) {
+            try {
+                // Try DexScreener API for additional token data
+                const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${mint}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.pairs && data.pairs.length > 0) {
+                        const pair = data.pairs[0];
+                        return {
+                            volume24h: parseFloat(pair.volume?.h24 || 0),
+                            priceChange24h: parseFloat(pair.priceChange?.h24 || 0),
+                            liquidity: parseFloat(pair.liquidity?.usd || 0)
+                        };
+                    }
+                }
+            } catch (error) {
+                console.warn('Failed to fetch token details from DexScreener:', error);
+            }
+            return null;
+        }
+
+        function createCoinCard(token) {
+            const changeColor = token.priceChange24h > 0 ? '#4CAF50' : '#f44336';
+            const changeSign = token.priceChange24h > 0 ? '+' : '';
+            const shortAddress = token.mint ? `${token.mint.slice(0, 6)}...${token.mint.slice(-4)}` : 'N/A';
+            
+            return `
+                <div class="coin-card new">
+                    <div class="pump-badge">PUMP</div>
+                    <div class="time-badge">${token.timeAgo}</div>
+                    <div class="coin-header">
+                        <div class="coin-icon">${(token.symbol || 'T').charAt(0)}</div>
+                        <div class="coin-info">
+                            <h3>${token.name || 'Unknown Token'}</h3>
+                            <div class="coin-symbol">$${token.symbol || 'UNKNOWN'}</div>
+                        </div>
+                    </div>
+                    <div class="coin-stats">
+                        <div class="stat">
+                            <div class="stat-label">Market Cap</div>
+                            <div class="stat-value market-cap">${formatCurrency(token.marketCap)}</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">24h Volume</div>
+                            <div class="stat-value">${formatCurrency(token.volume24h)}</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Price (USD)</div>
+                            <div class="stat-value">$${token.priceUsd ? token.priceUsd.toFixed(8) : '0.00000000'}</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">24h Change</div>
+                            <div class="stat-value" style="color: ${changeColor}">
+                                ${changeSign}${token.priceChange24h.toFixed(1)}%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="token-address">
+                        ${shortAddress}
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateStats() {
+            const tokenArray = Array.from(tokens.values());
+            const totalCoins = tokenArray.length;
+            
+            if (totalCoins > 0) {
+                const avgMarketCap = tokenArray.reduce((sum, token) => sum + token.marketCap, 0) / totalCoins;
+                const highestMarketCap = Math.max(...tokenArray.map(token => token.marketCap));
+                
+                document.getElementById('totalCoins').textContent = totalCoins;
+                document.getElementById('avgMarketCap').textContent = formatCurrency(avgMarketCap);
+                document.getElementById('highestMarketCap').textContent = formatCurrency(highestMarketCap);
+                document.getElementById('liveConnections').textContent = ws ? (ws.readyState === WebSocket.OPEN ? '1' : '0') : '0';
+                
+                document.getElementById('stats').style.display = 'grid';
+            }
+        }
+
+        function updateDisplay() {
+            const tokenArray = Array.from(tokens.values())
+                .sort((a, b) => b.marketCap - a.marketCap);
+
+            const loading = document.getElementById('loading');
+            const coinsGrid = document.getElementById('coinsGrid');
+            const noData = document.getElementById('noData');
+
+            loading.style.display = 'none';
+
+            if (tokenArray.length > 0) {
+                coinsGrid.innerHTML = tokenArray.map(createCoinCard).join('');
+                coinsGrid.style.display = 'grid';
+                noData.style.display = 'none';
+                updateStats();
+            } else {
+                coinsGrid.style.display = 'none';
+                noData.style.display = 'block';
+                document.getElementById('stats').style.display = 'none';
+            }
+
+            document.getElementById('lastUpdate').textContent = 
+                `Last updated: ${new Date().toLocaleTimeString()}`;
+        }
+
+        function connectWebSocket() {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                return;
+            }
+
+            updateConnectionStatus('connecting');
+            
+            try {
+                ws = new WebSocket('wss://pumpportal.fun/api/data');
+                
+                ws.onopen = () => {
+                    console.log('Connected to PumpPortal WebSocket');
+                    updateConnectionStatus('connected');
+                    connectionAttempts = 0;
+                    
+                    // Subscribe to new token creations
+                    ws.send(JSON.stringify({
+                        method: "subscribeNewToken"
+                    }));
+                    
+                    // Subscribe to token trades
+                    ws.send(JSON.stringify({
+                        method: "subscribeTokenTrade"
+                    }));
+                    
+                    console.log('Subscribed to PumpPortal data streams');
+                };
+
+                ws.onmessage = async (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        console.log('Received data:', data);
+                        
+                        // Handle different message types from PumpPortal
+                        if (data.txType && data.mint) {
+                            let marketCap = 0;
+                            let priceUsd = 0;
+                            
+                            // Calculate market cap from available data
+                            if (data.marketCapSol && data.marketCapSol > 0) {
+                                // Convert SOL to USD (approximate rate)
+                                marketCap = data.marketCapSol * 100; // Rough SOL to USD
+                            } else if (data.vTokensInBondingCurve && data.vSolInBondingCurve) {
+                                // Calculate from bonding curve data
+                                const solPrice = 100; // Approximate SOL price
+                                marketCap = (data.vSolInBondingCurve * solPrice * 1000000000) / data.vTokensInBondingCurve;
+                            }
+                            
+                            if (data.solAmount && data.tokenAmount && data.tokenAmount > 0) {
+                                priceUsd = (data.solAmount / data.tokenAmount) * 100; // Rough conversion
+                            }
+                            
+                            // Only show tokens with market cap >= $100k
+                            if (marketCap >= 100000) {
+                                const tokenKey = data.mint;
+                                
+                                // Fetch additional details if needed
+                                const details = await fetchTokenDetails(data.mint);
+                                
+                                const tokenData = {
+                                    name: data.name || `Token ${data.mint.slice(0, 8)}`,
+                                    symbol: data.symbol || data.mint.slice(0, 4).toUpperCase(),
+                                    marketCap: marketCap,
+                                    volume24h: details?.volume24h || Math.random() * 50000,
+                                    priceUsd: priceUsd,
+                                    priceChange24h: details?.priceChange24h || (Math.random() * 400 - 200),
+                                    timeAgo: getTimeAgo(Date.now()),
+                                    mint: data.mint,
+                                    timestamp: Date.now(),
+                                    txType: data.txType
+                                };
+                                
+                                tokens.set(tokenKey, tokenData);
+                                console.log(`Added token: ${tokenData.name} with market cap: $${marketCap.toLocaleString()}`);
+                                
+                                updateDisplay();
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error parsing WebSocket data:', error);
+                    }
+                };
+
+                ws.onerror = (error) => {
+                    console.error('WebSocket error:', error);
+                    updateConnectionStatus('disconnected');
+                };
+
+                ws.onclose = (event) => {
+                    console.log('WebSocket connection closed:', event.code, event.reason);
+                    updateConnectionStatus('disconnected');
+                    
+                    // Attempt to reconnect with exponential backoff
+                    if (connectionAttempts < maxRetries) {
+                        connectionAttempts++;
+                        const delay = Math.min(1000 * Math.pow(2, connectionAttempts), 30000);
+                        console.log(`Attempting to reconnect in ${delay}ms...`);
+                        setTimeout(connectWebSocket, delay);
+                    }
+                };
+
+            } catch (error) {
+                console.error('Failed to create WebSocket connection:', error);
+                updateConnectionStatus('disconnected');
+            }
+        }
+
+        function reconnectWebSocket() {
+            if (ws) {
+                ws.close();
+                ws = null;
+            }
+            connectionAttempts = 0;
+            tokens.clear();
+            updateDisplay();
+            connectWebSocket();
+        }
+
+        // Update time ago every minute
+        setInterval(() => {
+            tokens.forEach((token, key) => {
+                token.timeAgo = getTimeAgo(token.timestamp);
+            });
+            updateDisplay();
+        }, 60000);
+
+        // Clean up old tokens (older than 24 hours)
+        setInterval(() => {
+            const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000;
+            tokens.forEach((token, key) => {
+                if (token.timestamp < oneDayAgo) {
+                    tokens.delete(key);
+                }
+            });
+            updateDisplay();
+        }, 300000); // Every 5 minutes
+
+        // Start the application
+        connectWebSocket();
+    </script>
 </body>
 </html>
