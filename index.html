@@ -154,6 +154,59 @@
             left: 100%;
         }
 
+        .banner-section {
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .banner-image {
+            width: 100%;
+            height: 300px;
+            background: url('banner.jpg') center/cover no-repeat;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .banner-image:hover::before {
+            opacity: 1;
+        }
+
+        .banner-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .banner-image {
+                height: 200px;
+                border-radius: 15px;
+            }
+        }
+
         .features {
             padding: 100px 0;
             background: rgba(0, 0, 0, 0.3);
@@ -214,21 +267,43 @@
             background-clip: text;
         }
 
+        
+
         .floating-dog {
             position: fixed;
-            top: 20%;
-            right: 5%;
-            width: 150px;
-            height: 150px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23d2691e"/><circle cx="35" cy="40" r="8" fill="white"/><circle cx="65" cy="40" r="8" fill="white"/><circle cx="50" cy="60" r="15" fill="%23f4a460"/><path d="M 20 20 L 30 30 L 25 35 Z" fill="%23d2691e"/><path d="M 70 30 L 80 20 L 75 35 Z" fill="%23d2691e"/></svg>') center/contain no-repeat;
+            top: 25%;
+            right: 8%;
+            width: 180px;
+            height: 180px;
+            background: url('dog.jpg') center/contain no-repeat;
             animation: float 3s ease-in-out infinite;
             z-index: 100;
-            opacity: 0.8;
+            opacity: 0.9;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 107, 53, 0.4);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .floating-dog:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 107, 53, 0.5);
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+            }
+            25% { 
+                transform: translateY(-15px) rotate(2deg); 
+            }
+            50% { 
+                transform: translateY(-25px) rotate(0deg); 
+            }
+            75% { 
+                transform: translateY(-15px) rotate(-2deg); 
+            }
         }
 
         .stats {
@@ -320,10 +395,10 @@
             }
             
             .floating-dog {
-                width: 100px;
-                height: 100px;
-                top: 10%;
-                right: 2%;
+                width: 120px;
+                height: 120px;
+                top: 15%;
+                right: 5%;
             }
         }
 
@@ -388,6 +463,12 @@
                 <h1>ICED BONK</h1>
                 <p>The coolest meme token on the blockchain! Join the revolution of diamond-studded doge energy. BONK with style, BONK with ice, BONK to the moon! 🚀</p>
                 <a href="#" class="cta-button">GET ICED BONK NOW</a>
+            </div>
+        </section>
+
+        <section class="banner-section">
+            <div class="banner-container">
+                <div class="banner-image"></div>
             </div>
         </section>
 
