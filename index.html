@@ -97,6 +97,7 @@
                 linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
                 url('./ice.jpg') center/cover no-repeat;
         }
+
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 20px;
@@ -156,7 +157,7 @@
             left: 100%;
         }
 
-        /* CA Section Styles - Updated to match stats section */
+        /* CA Section Styles */
         .ca-section {
             padding: 60px 20px;
             background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
@@ -305,14 +306,14 @@
 
         .banner-container {
             width: 100%;
-            max-width: 640px; /* 2x the banner width for crisp display */
+            max-width: 640px;
             margin: 0 auto;
             position: relative;
         }
 
         .banner-image {
             width: 100%;
-            height: 216px; /* 2x the banner height (108px * 2) */
+            height: 216px;
             background: url('./banner1.jpg') center/cover no-repeat;
             border-radius: 20px;
             border: 2px solid rgba(255, 107, 53, 0.3);
@@ -515,12 +516,70 @@
             border-radius: 15px;
             border: 1px solid rgba(255, 107, 53, 0.3);
             text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .token-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e, #ffdc00);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .token-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 147, 30, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .token-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+            border-color: #f7931e;
+        }
+
+        .token-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .token-card:hover::after {
+            opacity: 1;
+        }
+
+        .token-card:hover h4 {
+            color: #f7931e;
+            transform: scale(1.1);
+        }
+
+        .token-card:hover p {
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         .token-card h4 {
             color: #ff6b35;
             font-size: 1.3rem;
             margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .token-card p {
+            transition: all 0.3s ease;
         }
 
         footer {
@@ -617,6 +676,7 @@
             }
         }
 
+        /* Particle System Styles */
         .particles {
             position: fixed;
             top: 0;
@@ -632,7 +692,7 @@
             position: absolute;
             border-radius: 50%;
             pointer-events: none;
-            animation: particleFloat linear infinite;
+            opacity: 0;
         }
         
         .particle-small {
@@ -655,44 +715,13 @@
             background: #ff4500;
             box-shadow: 0 0 10px #ff4500;
         }
-        
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-100px) translateX(var(--drift)) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Additional particle variations */
-        .particle-glow {
-            animation: particleGlow linear infinite;
-        }
-        
-        @keyframes particleGlow {
-            0% {
-                transform: translateY(100vh) scale(0.5);
-                opacity: 0;
-                filter: brightness(1);
-            }
-            50% {
-                opacity: 1;
-                filter: brightness(1.5);
-            }
-            100% {
-                transform: translateY(-100px) scale(1.2);
-                opacity: 0;
-                filter: brightness(0.8);
-            }
+
+        .particle-diamond {
+            width: 6px;
+            height: 6px;
+            background: #ffdc00;
+            box-shadow: 0 0 12px #ffdc00;
+            transform: rotate(45deg);
         }
     </style>
 </head>
@@ -855,30 +884,3 @@
                     showCopyNotification();
                 }).catch(() => {
                     fallbackCopy(contractAddress);
-                });
-            } else {
-                fallbackCopy(contractAddress);
-            }
-        }
-
-        // Fallback copy method for older browsers or non-HTTPS
-        function fallbackCopy(text) {
-            try {
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                textArea.style.top = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                const successful = document.execCommand('copy');
-                document.body.removeChild(textArea);
-                
-                if (successful) {
-                    showCopyNotification();
-                } else {
-                    // Final fallback - select text for user to copy manually
-                    selectAddressText();
-                }
