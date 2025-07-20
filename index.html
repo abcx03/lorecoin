@@ -156,6 +156,142 @@
             left: 100%;
         }
 
+        /* CA Section Styles */
+        .ca-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .ca-title {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: caGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes caGlow {
+            from {
+                text-shadow: 0 0 10px #ff6b35, 0 0 20px #ff6b35, 0 0 30px #ff6b35;
+            }
+            to {
+                text-shadow: 0 0 20px #f7931e, 0 0 30px #f7931e, 0 0 40px #f7931e;
+            }
+        }
+
+        .ca-container {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            border: 2px solid #ff6b35;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 3s ease-in-out infinite;
+            max-width: 90%;
+            width: 600px;
+        }
+
+        .ca-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+            border-color: #f7931e;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            }
+            50% {
+                box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+            }
+        }
+
+        .ca-label {
+            color: #ff6b35;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .ca-address {
+            background: #000;
+            border: 1px solid #ff6b35;
+            border-radius: 8px;
+            padding: 15px;
+            color: #f7931e;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            word-break: break-all;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ca-address::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ff6b35);
+            border-radius: 8px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ca-address:hover {
+            color: #fff;
+            background: #111;
+            transform: scale(1.02);
+        }
+
+        .ca-address:hover::before {
+            opacity: 1;
+        }
+
+        .copy-hint {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transform: translateX(300px);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+
+        .copy-notification.show {
+            transform: translateX(0);
+        }
+
         .banner-section {
             padding: 60px 0;
             position: relative;
@@ -238,25 +374,6 @@
             box-shadow: 0 20px 50px rgba(255, 107, 53, 0.6);
         }
 
-        @media (max-width: 768px) {
-            .banner-container {
-                max-width: 320px;
-            }
-            
-            .banner-image {
-                height: 108px;
-                border-radius: 15px;
-            }
-            
-            .banner-content h2 {
-                font-size: 1.5rem;
-            }
-            
-            .banner-content p {
-                font-size: 0.9rem;
-            }
-        }
-
         .features {
             padding: 100px 0;
             background: rgba(0, 0, 0, 0.3);
@@ -316,8 +433,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        
 
         .floating-dog {
             position: fixed;
@@ -450,6 +565,54 @@
                 top: 15%;
                 right: 5%;
             }
+
+            .ca-title {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .ca-container {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .ca-address {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+
+            .banner-container {
+                max-width: 320px;
+            }
+            
+            .banner-image {
+                height: 108px;
+                border-radius: 15px;
+            }
+            
+            .banner-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .banner-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ca-title {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+            
+            .ca-section {
+                padding: 40px 15px;
+            }
+            
+            .ca-address {
+                font-size: 0.8rem;
+                padding: 10px;
+            }
         }
 
         .particles {
@@ -513,10 +676,23 @@
                 <h1>$ICEDBONK</h1>
                 <p>The coolest meme token on the blockchain! Join the revolution of diamond-studded bonk energy. BONK with style, BONK with ice, $ICEDBONK to the moon! 🚀</p>
                 <a href="#" class="cta-button">GET ICED BONK NOW</a>
-                 <p>   </p>
-                <p>CA: 0x1234567890abcdef1234567890abcdef12345678</p>
             </div>
         </section>
+
+        <section class="ca-section">
+            <h2 class="ca-title">Contract Address</h2>
+            <div class="ca-container">
+                <div class="ca-label">CA</div>
+                <div class="ca-address" onclick="copyToClipboard('0x241251241251254125125')" id="contractAddress">
+                    0x241251241251254125125
+                </div>
+                <div class="copy-hint">Click to copy address</div>
+            </div>
+        </section>
+
+        <div class="copy-notification" id="copyNotification">
+            Address copied to clipboard!
+        </div>
 
         <section class="banner-section">
             <div class="banner-container">
@@ -626,6 +802,30 @@
     </footer>
 
     <script>
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                showCopyNotification();
+            }).catch(function(err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyNotification();
+            });
+        }
+
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
         // Create floating particles
         function createParticles() {
             const particles = document.getElementById('particles');
@@ -687,6 +887,3 @@
         }
 
         window.addEventListener('load', animateCounters);
-    </script>
-</body>
-</html>
